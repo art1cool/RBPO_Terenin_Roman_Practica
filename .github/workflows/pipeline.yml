@@ -1,0 +1,30 @@
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: maven:3.9.x-eclipse-temurin-21
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Permission for mvnw
+        run: chmod +x ./mvnw
+
+      - name: Build
+        run: ./mvnw clean package
+
+      - name: Test
+        run: ./mvnw test
+
+      - name: Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-jar
+          path: ./target/*.jar
