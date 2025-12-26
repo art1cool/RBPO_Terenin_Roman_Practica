@@ -27,3 +27,8 @@ server:
 app:
   plugin:
     url:
+
+jwt:
+  accessExpiration: 900000
+  refreshExpiration: 604800000
+  secret: SecretniyJwtKluchForSecretsScan1
